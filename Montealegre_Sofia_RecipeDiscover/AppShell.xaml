@@ -7,8 +7,9 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Montealegre_Sofia_RecipeDiscover">
 
-	<FlyoutItem
-		Title = "Find a Recipe">
-	</FlyoutItem>
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
 </Shell>

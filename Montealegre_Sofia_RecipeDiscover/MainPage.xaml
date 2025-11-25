@@ -17,9 +17,29 @@
 				WidthRequest="600"
 				HeightRequest="50"
 				Margin="0,40,0,0"
-				Background="lightSalmon"/>
+				Background="lightSalmon"
+				Completed="OnSearchCompleted"/>
 			</HorizontalStackLayout>
-
+			<CollectionView x:Name="FoodList"
+							ItemsLayout="VerticalGrid, 3"
+							Margin="10">
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+					<Grid Padding="10">
+						<Grid.RowDefinitions>
+								<RowDefinition Height="150"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<Image Grid.Row="0"
+								   Source="{Binding strMealThumb}"
+								   Aspect="AspectFill"/>
+							<Label Grid.Row="1"
+								   Text="{Binding strMeal}"
+								   HorizontalOptions="Center"/>
+						</Grid>
+				</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
 		</VerticalStackLayout>
 	</ScrollView>
 		

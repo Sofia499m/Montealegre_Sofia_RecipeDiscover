@@ -5,9 +5,20 @@
 			 Title="Recipe Discover and Meal Planner">
 	<ScrollView>
 		<VerticalStackLayout>
-			<Entry 
-					x:Name="Search" Placeholder="Enter Ingredients..."
-					HorizontalOptions="Center"/>
+			<Label Text="Recipe Discover"
+				   HorizontalOptions="Center"
+				   FontSize="Header"
+				   Margin="0,20,0,0"/>
+			<HorizontalStackLayout HorizontalOptions="Center">
+				<Entry 
+				x:Name="Search" 
+				Placeholder="Enter Ingredients..."
+				HorizontalOptions="Center"
+				WidthRequest="600"
+				HeightRequest="50"
+				Margin="0,40,0,0"
+				Background="lightSalmon"/>
+			</HorizontalStackLayout>
 
 		</VerticalStackLayout>
 	</ScrollView>

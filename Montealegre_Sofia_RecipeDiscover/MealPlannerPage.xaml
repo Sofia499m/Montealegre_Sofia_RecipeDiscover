@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Montealegre_Sofia_RecipeDiscover.MealPlannerPage"
+             Title="">
+	<ScrollView>
+		<VerticalStackLayout Padding="16" Spacing="20">
+
+			<Label Text="Meal Planner" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+			<Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,*,*,*,*,*,*">
+				<Label Text="Mon" Grid.Row="0" Grid.Column="0"/>
+				<Label Text="Tue" Grid.Row="0" Grid.Column="1"/>
+				<Label Text="Wed" Grid.Row="0" Grid.Column="2"/>
+				<Label Text="Thu" Grid.Row="0" Grid.Column="3"/>
+				<Label Text="Fri" Grid.Row="0" Grid.Column="4"/>
+				<Label Text="Sat" Grid.Row="0" Grid.Column="5"/>
+				<Label Text="Sun" Grid.Row="0" Grid.Column="6"/>
+				<!-- Breakfast rows -->
+				<Border Grid.Row="1" Grid.Column="0">
+					<Label Text="{Binding MondayMeal}" />
+				</Border>
+				<Border Grid.Row="1" Grid.Column="1">
+					<Label Text="{Binding TuesdayMeal}" />
+				</Border>
+				<Border Grid.Row="1" Grid.Column="2">
+					<Label Text="{Binding WednesdayMeal}" />
+				</Border>
+				<Border Grid.Row="1" Grid.Column="3">
+					<Label Text="{Binding ThursdayMeal}" />
+				</Border>
+				<Border Grid.Row="1" Grid.Column="4">
+					<Label Text="{Binding FrydayMeal}" />
+				</Border>
+				<Border Grid.Row="1" Grid.Column="5">
+					<Label Text="{Binding SaturdayMeal}" />
+				</Border>
+				<Border Grid.Row="1" Grid.Column="6">
+					<Label Text="{Binding SundayMeal}" />
+				</Border>
+				<!-- Lunch rows -->
+				<Border Grid.Row="2" Grid.Column="0">
+					<Label Text="{Binding MondayMeal}" />
+				</Border>
+				<Border Grid.Row="2" Grid.Column="1">
+					<Label Text="{Binding TuesdayMeal}" />
+				</Border>
+				<Border Grid.Row="2" Grid.Column="2">
+					<Label Text="{Binding WednesdayMeal}" />
+				</Border>
+				<Border Grid.Row="2" Grid.Column="3">
+					<Label Text="{Binding ThursdayMeal}" />
+				</Border>
+				<Border Grid.Row="2" Grid.Column="4">
+					<Label Text="{Binding FrydayMeal}" />
+				</Border>
+				<Border Grid.Row="2" Grid.Column="5">
+					<Label Text="{Binding SaturdayMeal}" />
+				</Border>
+				<Border Grid.Row="2" Grid.Column="6">
+					<Label Text="{Binding SundayMeal}" />
+				</Border>
+				<!-- Dinner rows -->
+				<Border Grid.Row="3" Grid.Column="0">
+					<Label Text="{Binding MondayMeal}" />
+				</Border>
+				<Border Grid.Row="3" Grid.Column="1">
+					<Label Text="{Binding TuesdayMeal}" />
+				</Border>
+				<Border Grid.Row="3" Grid.Column="2">
+					<Label Text="{Binding WednesdayMeal}" />
+				</Border>
+				<Border Grid.Row="3" Grid.Column="3">
+					<Label Text="{Binding ThursdayMeal}" />
+				</Border>
+				<Border Grid.Row="3" Grid.Column="4">
+					<Label Text="{Binding FrydayMeal}" />
+				</Border>
+				<Border Grid.Row="3" Grid.Column="5">
+					<Label Text="{Binding SaturdayMeal}" />
+				</Border>
+				<Border Grid.Row="3" Grid.Column="6">
+					<Label Text="{Binding SundayMeal}" />
+				</Border>
+			</Grid>
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>

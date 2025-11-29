@@ -7,9 +7,21 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Montealegre_Sofia_RecipeDiscover">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+	<!-- Bottom Tabs -->
+	<FlyoutItem Title="Browse Recipes" Icon="search.png">
+		<Tab>
+			<ShellContent ContentTemplate="{DataTemplate local:RecipeBrowserPage}" />
+		</Tab>
+	</FlyoutItem>
+	<FlyoutItem Title="Meal Planner" Icon="calendar.png">
+		<Tab>
+			<ShellContent ContentTemplate="{DataTemplate local:MealPlannerPage}" />
+		</Tab>
+	</FlyoutItem>
+	<FlyoutItem Title="Shopping List" Icon="list.png">
+		<Tab>
+			<ShellContent ContentTemplate="{DataTemplate local:ShoppingListPage}" />
+		</Tab>						
+	</FlyoutItem>
 
 </Shell>

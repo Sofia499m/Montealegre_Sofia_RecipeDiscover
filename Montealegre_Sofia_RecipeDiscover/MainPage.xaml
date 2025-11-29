@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Montealegre_Sofia_RecipeDiscover.MainPage"
-			 Title="Recipe Discover and Meal Planner">
+             x:Class="Montealegre_Sofia_RecipeDiscover.MainPage">
 	<ScrollView>
 		<VerticalStackLayout>
 			<Label Text="Recipe Discover"
 				   HorizontalOptions="Center"
 				   FontSize="Header"
-				   Margin="0,20,0,0"/>
+				   Margin="0,20,0,0"/>	
 			<HorizontalStackLayout HorizontalOptions="Center">
 				<Entry 
 				x:Name="Search" 

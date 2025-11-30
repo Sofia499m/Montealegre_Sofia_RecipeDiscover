@@ -5,7 +5,11 @@
              Title="">
 	<VerticalStackLayout Padding="16">
 		<Label Text="Find a Recipe" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Padding="20"/>
-		<SearchBar Placeholder="Search recipes..." />
+		<SearchBar 
+            Placeholder="Search recipes..."
+            Text="{Binding SearchText}"
+            SearchCommand="{Binding SearchCommand}"
+        />
 
 		<CollectionView ItemsSource="{Binding Recipes}">
 			<CollectionView.ItemTemplate>
@@ -14,14 +18,15 @@
 
 						<Image 
                             Grid.Column="0"
-                            Source="{Binding Image}" 
+                            Source="{Binding strMealThumb}" 
                             Aspect="AspectFill"
                             HeightRequest="80" WidthRequest="80"
                             />
 
 						<VerticalStackLayout Grid.Column="1" Padding="8,0">
-							<Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16"/>
-							<Label Text="{Binding Description}" LineBreakMode="TailTruncation"/>
+							<Label Text="{Binding strMeal}" FontAttributes="Bold" FontSize="16"/>
+							<Label Text="{Binding strCategory}" LineBreakMode="TailTruncation"/>
+							<Label Text="{Binding strTags}" LineBreakMode="TailTruncation"/>
 						</VerticalStackLayout>
 
 					</Grid>

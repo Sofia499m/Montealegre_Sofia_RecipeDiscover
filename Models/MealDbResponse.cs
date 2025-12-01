@@ -10,6 +10,6 @@ namespace Montealegre_Sofia_RecipeDiscover.Models
 	internal class MealDbResponse
 	{
 		[JsonPropertyName("meals")]
-		public List<Recipe> Meals {get;set;}
+		public List<Meals> Meals {get;set;}
 	}
 }

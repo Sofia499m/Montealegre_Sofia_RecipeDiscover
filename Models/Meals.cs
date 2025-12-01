@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
-	internal class Recipe
+	internal class Meals
 	{
 		public string idMeal { get; set; }
 		public string strMeal { get; set; }
@@ -61,6 +61,5 @@ namespace Montealegre_Sofia_RecipeDiscover.Models
 		public string strImageSource { get; set; }
 		public string strCreativeCommonsConfirmed { get; set; }
 		public string dateModified { get; set; }
-
 	}
 }

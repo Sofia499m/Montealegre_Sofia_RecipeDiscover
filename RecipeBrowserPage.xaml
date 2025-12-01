@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Montealegre_Sofia_RecipeDiscover.RecipeBrowserPage"
+             Title="">
+
+	<Grid RowDefinitions="Auto,*" ColumnDefinitions="2*,3*">
+		<VerticalStackLayout Grid.Row="0" Grid.ColumnSpan="2">
+			<Label Text="Find a Recipe" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Padding="20"/>
+			<SearchBar 
+        Placeholder="Search recipes..."
+        Text="{Binding SearchText}"
+        SearchCommand="{Binding SearchCommand}"
+			/>
+		</VerticalStackLayout>
+		<CollectionView  Grid.Row="1" Grid.Column="0"
+					ItemsSource="{Binding Recipes}"
+					SelectionMode="Single"
+					SelectedItem="{Binding SelectedRecipe}"
+					Margin="10">
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<Grid Padding="8" ColumnDefinitions="100,*">
+
+							<Image 
+                            Grid.Column="0"
+                            Source="{Binding Image}" 
+                            Aspect="AspectFill"
+                            HeightRequest="80" WidthRequest="80"
+                            />
+
+							<VerticalStackLayout Grid.Column="1" Padding="8,0">
+								<Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16"/>
+								<Label Text="{Binding Category}" LineBreakMode="TailTruncation"/>
+								<Label Text="{Binding Tags}" LineBreakMode="TailTruncation"/>
+							</VerticalStackLayout>
+
+						</Grid>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+			<ScrollView Grid.Row="2" Grid.Column="1" Padding="20">
+			<VerticalStackLayout BindingContext="{Binding SelectedRecipe}">
+				
+				<Image Source="{Binding Image}"
+						HeightRequest="200"
+						/>
+				
+				<Label Text="{Binding Name}"
+					   FontAttributes="Bold" 
+					   FontSize="16"
+						/>
+				
+				<Label Text="{Binding Category}" 
+                        FontSize="18"
+                        TextColor="Gray" />
+
+				<Grid ColumnDefinitions="2*,1*" RowSpacing="6">
+
+					<Label Text="Ingredients" 
+						   FontAttributes="Bold" 
+						   Grid.Row="0"
+                           Grid.Column="0"/>
+
+					<Label Text="Quantity"
+						   FontAttributes="Bold"
+						   Grid.Row="0"
+						   Grid.Column="1"/>
+					<CollectionView Grid.Row="1" Grid.ColumnSpan="2"
+								ItemsSource="{Binding Ingredients}">
+					<CollectionView.ItemTemplate>
+						<DataTemplate>
+							<Grid ColumnDefinitions="2,1" Padding="5">
+								<Label Text="{Binding Name}"/>
+								<Label Text="{Binding Measure}"/>
+							</Grid>
+						</DataTemplate>
+					</CollectionView.ItemTemplate>
+				</CollectionView>
+				</Grid>
+				<Label Text="Instructions"
+					   FontAttributes="Bold"
+					   FontSize="20"/>
+				<Label Text="{Binding Instructions}" 
+                        Margin="0,20" />
+				</VerticalStackLayout>
+			</ScrollView>	
+		</Grid>
+</ContentPage>

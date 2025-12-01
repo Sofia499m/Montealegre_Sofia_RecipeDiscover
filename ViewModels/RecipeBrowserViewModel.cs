@@ -15,7 +15,6 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 	{
 		private readonly RecipeApiService _apiService;
 		private CancellationTokenSource _typingDelayCts;
-		
 		public ObservableCollection<Recipe> Recipes { get; set; } = new();
 
 		private string _searchText;
@@ -40,30 +39,8 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 				{
 					_selectedRecipe = value;
 					OnPropertyChanged();
-					UpdateIngredients();
 				}
 			}
-		}
-		private ObservableCollection<Ingredient> _ingredients = new();
-		private ObservableCollection<Ingredient> Ingredients
-		{
-			get => _ingredients;
-			set
-			{
-				_ingredients = value;
-				OnPropertyChanged();
-			}
-		}
-
-		private void UpdateIngredients()
-		{
-			Ingredients.Clear();
-			if (SelectedRecipe != null)
-			{
-				foreach (var ing in SelectedRecipe.ingredients)
-					Ingredients.Add(ing);
-			}
-
 		}
 		public Command SearchCommand { get; }
 

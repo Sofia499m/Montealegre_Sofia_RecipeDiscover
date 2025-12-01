@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Montealegre_Sofia_RecipeDiscover", "Montealegre_Sofia_RecipeDiscover\Montealegre_Sofia_RecipeDiscover.csproj", "{BBBC3C24-4858-4C94-A5BF-2DCB472BD1FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Montealegre_Sofia_RecipeDiscover", "Montealegre_Sofia_RecipeDiscover.csproj", "{BBBC3C24-4858-4C94-A5BF-2DCB472BD1FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

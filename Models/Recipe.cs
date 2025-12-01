@@ -21,7 +21,7 @@ namespace Montealegre_Sofia_RecipeDiscover.Models
 		public string ImageSource { get; set; }
 		public string CreativeCommonsConfirmed { get; set; }
 		public string DateModified { get; set; }
-		public List<Ingredient> ingredients { get; set; }
+		public List<Ingredient> ingredients { get; set; } = new List<Ingredient>();
 
 	}
 		

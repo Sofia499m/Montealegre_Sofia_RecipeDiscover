@@ -1,6 +1,7 @@
 ﻿using Montealegre_Sofia_RecipeDiscover.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -30,7 +31,6 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 			foreach (var meal in results.Meals) {
 				result.Add(GetRecipeFromMeal(meal));
 			}
-
 			return result;
 		}
 

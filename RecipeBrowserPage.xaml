@@ -39,9 +39,9 @@
 					</DataTemplate>
 				</CollectionView.ItemTemplate>
 			</CollectionView>
-			<ScrollView Grid.Row="2" Grid.Column="1" Padding="20">
+		<ScrollView Grid.Row="2" Grid.Column="1" Padding="20" >
 			<VerticalStackLayout BindingContext="{Binding SelectedRecipe}">
-				
+
 				<Image Source="{Binding Image}"
 						HeightRequest="200"
 						/>
@@ -55,7 +55,7 @@
                         FontSize="18"
                         TextColor="Gray" />
 
-				<Grid ColumnDefinitions="2*,1*" RowSpacing="6">
+				<Grid ColumnDefinitions="2*,1*" RowDefinitions="Auto,*" RowSpacing="6">
 
 					<Label Text="Ingredients" 
 						   FontAttributes="Bold" 
@@ -65,25 +65,28 @@
 					<Label Text="Quantity"
 						   FontAttributes="Bold"
 						   Grid.Row="0"
-						   Grid.Column="1"/>
+						   Grid.Column="1"
+						   />
 					<CollectionView Grid.Row="1" Grid.ColumnSpan="2"
-								ItemsSource="{Binding Ingredients}">
-					<CollectionView.ItemTemplate>
-						<DataTemplate>
-							<Grid ColumnDefinitions="2,1" Padding="5">
-								<Label Text="{Binding Name}"/>
-								<Label Text="{Binding Measure}"/>
-							</Grid>
-						</DataTemplate>
-					</CollectionView.ItemTemplate>
-				</CollectionView>
+								    ItemsSource="{Binding ingredients}">
+						<CollectionView.ItemTemplate>
+							<DataTemplate>
+								<Grid ColumnDefinitions="2*,1*" Padding="5">
+									<Label Text="{Binding Name}"/>
+									<Label Text="{Binding Measure}"
+										   Grid.Column="1"/>
+								</Grid>
+							</DataTemplate>
+						</CollectionView.ItemTemplate>
+					</CollectionView>
 				</Grid>
 				<Label Text="Instructions"
 					   FontAttributes="Bold"
-					   FontSize="20"/>
+					   FontSize="20"
+					   />
 				<Label Text="{Binding Instructions}" 
                         Margin="0,20" />
-				</VerticalStackLayout>
+			</VerticalStackLayout>
 			</ScrollView>	
 		</Grid>
 </ContentPage>

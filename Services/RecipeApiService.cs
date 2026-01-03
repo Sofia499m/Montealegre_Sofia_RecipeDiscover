@@ -34,6 +34,33 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 			return result;
 		}
 
+		public async Task<List<string>> SearchMeal(string query)
+		{
+			string url = $"https://www.themealdb.com/api/json/v1/1/search.php?s={query}";
+
+			var response = await _client.GetStringAsync(url);
+
+			var results = JsonSerializer.Deserialize<MealDbResponse>(response);
+
+			List<string> meals = new List<string>();
+			foreach (var meal in results.Meals)
+			{
+				var recipe = GetRecipeFromMeal(meal);
+				meals.Add(recipe.Name);
+			}
+			return meals;
+		}
+
+		private Recipe GetRecipeFromCategory(Meals meal) 
+		{ 
+			return new Recipe
+			{
+				Id = meal.idMeal,
+				Name = meal.strMeal,
+				Image = meal.strMealThumb
+			};
+		}
+
 		private Recipe GetRecipeFromMeal(Meals meal) 
 		{
 			Recipe recipe = new Recipe {
@@ -78,6 +105,28 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 			return recipe;
 
 
+		}
+
+		internal async Task<List<Recipe>> SearchRecipesByCategories(List<string> categories)
+		{
+			List<Recipe> meals = new List<Recipe>();
+			foreach (var category in categories) {
+				string url = $"https://www.themealdb.com/api/json/v1/1/filter.php?c={category}";
+				var response = await _client.GetStringAsync(url);
+
+				var results = JsonSerializer.Deserialize<MealDbResponse>(response);
+
+				
+				foreach (var meal in results.Meals)
+				{
+					var recipe = GetRecipeFromCategory(meal);
+					meals.Add(recipe);
+				}
+			}
+			
+
+			
+			return meals;
 		}
 	}
 }

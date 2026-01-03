@@ -3,87 +3,185 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Montealegre_Sofia_RecipeDiscover.MealPlannerPage"
              Title="">
-	<ScrollView>
-		<VerticalStackLayout Padding="16" Spacing="20">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+				<GradientStop Color="#667eea" Offset="0.0" />
+				<GradientStop Color="#764ba2" Offset="1.0" />
+			</LinearGradientBrush>
+		</ResourceDictionary>
+	</ContentPage.Resources>
 
-			<Label Text="Meal Planner" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
+	<Grid Background="{StaticResource BackgroundGradient}" Padding="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
 
-			<Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,*,*,*,*,*,*">
-				<Label Text="Mon" Grid.Row="0" Grid.Column="0"/>
-				<Label Text="Tue" Grid.Row="0" Grid.Column="1"/>
-				<Label Text="Wed" Grid.Row="0" Grid.Column="2"/>
-				<Label Text="Thu" Grid.Row="0" Grid.Column="3"/>
-				<Label Text="Fri" Grid.Row="0" Grid.Column="4"/>
-				<Label Text="Sat" Grid.Row="0" Grid.Column="5"/>
-				<Label Text="Sun" Grid.Row="0" Grid.Column="6"/>
-				<!-- Breakfast rows -->
-				<Border Grid.Row="1" Grid.Column="0">
-					<Label Text="{Binding MondayMeal}" />
-				</Border>
-				<Border Grid.Row="1" Grid.Column="1">
-					<Label Text="{Binding TuesdayMeal}" />
-				</Border>
-				<Border Grid.Row="1" Grid.Column="2">
-					<Label Text="{Binding WednesdayMeal}" />
-				</Border>
-				<Border Grid.Row="1" Grid.Column="3">
-					<Label Text="{Binding ThursdayMeal}" />
-				</Border>
-				<Border Grid.Row="1" Grid.Column="4">
-					<Label Text="{Binding FrydayMeal}" />
-				</Border>
-				<Border Grid.Row="1" Grid.Column="5">
-					<Label Text="{Binding SaturdayMeal}" />
-				</Border>
-				<Border Grid.Row="1" Grid.Column="6">
-					<Label Text="{Binding SundayMeal}" />
-				</Border>
-				<!-- Lunch rows -->
-				<Border Grid.Row="2" Grid.Column="0">
-					<Label Text="{Binding MondayMeal}" />
-				</Border>
-				<Border Grid.Row="2" Grid.Column="1">
-					<Label Text="{Binding TuesdayMeal}" />
-				</Border>
-				<Border Grid.Row="2" Grid.Column="2">
-					<Label Text="{Binding WednesdayMeal}" />
-				</Border>
-				<Border Grid.Row="2" Grid.Column="3">
-					<Label Text="{Binding ThursdayMeal}" />
-				</Border>
-				<Border Grid.Row="2" Grid.Column="4">
-					<Label Text="{Binding FrydayMeal}" />
-				</Border>
-				<Border Grid.Row="2" Grid.Column="5">
-					<Label Text="{Binding SaturdayMeal}" />
-				</Border>
-				<Border Grid.Row="2" Grid.Column="6">
-					<Label Text="{Binding SundayMeal}" />
-				</Border>
-				<!-- Dinner rows -->
-				<Border Grid.Row="3" Grid.Column="0">
-					<Label Text="{Binding MondayMeal}" />
-				</Border>
-				<Border Grid.Row="3" Grid.Column="1">
-					<Label Text="{Binding TuesdayMeal}" />
-				</Border>
-				<Border Grid.Row="3" Grid.Column="2">
-					<Label Text="{Binding WednesdayMeal}" />
-				</Border>
-				<Border Grid.Row="3" Grid.Column="3">
-					<Label Text="{Binding ThursdayMeal}" />
-				</Border>
-				<Border Grid.Row="3" Grid.Column="4">
-					<Label Text="{Binding FrydayMeal}" />
-				</Border>
-				<Border Grid.Row="3" Grid.Column="5">
-					<Label Text="{Binding SaturdayMeal}" />
-				</Border>
-				<Border Grid.Row="3" Grid.Column="6">
-					<Label Text="{Binding SundayMeal}" />
-				</Border>
-			</Grid>
+		<!-- Title -->
+		<Label Grid.Row="0"
+               Text="Weekly Meal Planner"
+               FontSize="32"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20"/>
 
-		</VerticalStackLayout>
-	</ScrollView>
+		<!-- Carousel View -->
+		<CarouselView Grid.Row="1"
+                      ItemsSource="{Binding Days}"
+                      IndicatorView="indicatorView"
+                      PeekAreaInsets="40">
+			<CarouselView.ItemTemplate>
+				<DataTemplate>
+					<Border BackgroundColor="White"
+                            StrokeThickness="0"
+                            Padding="30"
+                            Margin="10"
+                            StrokeShape="RoundRectangle 20">
+						<Border.Shadow>
+							<Shadow Brush="Black"
+                                    Offset="0,10"
+                                    Radius="20"
+                                    Opacity="0.3"/>
+						</Border.Shadow>
+
+						<ScrollView>
+							<VerticalStackLayout Spacing="20">
+
+								<!-- Day Header -->
+								<VerticalStackLayout Spacing="5">
+									<Label Text="{Binding DayName}"
+                                           FontSize="36"
+                                           FontAttributes="Bold"
+                                           TextColor="#667eea"
+                                           HorizontalOptions="Center"/>
+									<Label Text="{Binding DateInfo}"
+                                           FontSize="14"
+                                           TextColor="#666"
+                                           HorizontalOptions="Center"/>
+									<BoxView HeightRequest="3"
+                                             BackgroundColor="#667eea"
+                                             HorizontalOptions="Fill"
+                                             Margin="0,10,0,0"/>
+								</VerticalStackLayout>
+
+								<!-- Breakfast -->
+								<VerticalStackLayout Spacing="8">
+									<Label Text="🍽️ Breakfast"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#764ba2"/>
+									<Border Stroke="#e0e0e0"
+                                            StrokeThickness="2"
+                                            BackgroundColor="White"
+                                            StrokeShape="RoundRectangle 10">
+										<Grid ColumnDefinitions="*,Auto" Padding="5">
+											<Picker Grid.Column="0"
+												ItemsSource="{Binding BreakfastOptions}"
+												ItemDisplayBinding="{Binding Name}"
+												SelectedItem="{Binding Breakfast}"
+												FontSize="16"
+												TextColor="#333"/>
+										</Grid>
+									</Border>
+								</VerticalStackLayout>
+
+								<!-- Lunch -->
+								<VerticalStackLayout Spacing="8">
+									<Label Text="🍽️ Lunch"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#764ba2"/>
+									<Border Stroke="#e0e0e0"
+                                            StrokeThickness="2"
+                                            BackgroundColor="White"
+                                            StrokeShape="RoundRectangle 10">
+										<Grid ColumnDefinitions="*,Auto" Padding="5">
+											<Picker Grid.Column="0"
+                                                    ItemsSource="{Binding LunchOptions}"
+													ItemDisplayBinding="{Binding Name}"
+                                                    SelectedItem="{Binding Lunch}"
+                                                    FontSize="16"
+                                                    TextColor="#333"/>
+										</Grid>
+									</Border>
+								</VerticalStackLayout>
+
+								<!-- Dinner -->
+								<VerticalStackLayout Spacing="8">
+									<Label Text="🍽️ Dinner"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#764ba2"/>
+									<Border Stroke="#e0e0e0"
+                                            StrokeThickness="2"
+                                            BackgroundColor="White"
+                                            StrokeShape="RoundRectangle 10">
+										<Grid ColumnDefinitions="*,Auto" Padding="5">
+											<Picker Grid.Column="0"
+                                                    ItemsSource="{Binding DinnerOptions}"
+													ItemDisplayBinding="{Binding Name}"
+                                                    SelectedItem="{Binding Dinner}"
+                                                    FontSize="16"
+                                                    TextColor="#333"/>
+										</Grid>
+									</Border>
+								</VerticalStackLayout>
+
+								<!-- Snacks -->
+								<VerticalStackLayout Spacing="8">
+									<Label Text="🍽️ Snacks"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#764ba2"/>
+									<Border Stroke="#e0e0e0"
+                                            StrokeThickness="2"
+                                            BackgroundColor="White"
+                                            StrokeShape="RoundRectangle 10">
+										<Grid ColumnDefinitions="*,Auto" Padding="5">
+											<Picker Grid.Column="0"
+                                                    ItemsSource="{Binding SnacksOptions}"
+													ItemDisplayBinding="{Binding Name}"
+                                                    SelectedItem="{Binding Snacks}"
+                                                    FontSize="16"
+                                                    TextColor="#333"/>
+										</Grid>
+									</Border>
+								</VerticalStackLayout>
+
+								<!-- Save Button -->
+								<Button Text="{Binding SaveButtonText}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SaveMealCommand}"
+                                        CommandParameter="{Binding .}"
+                                        FontSize="18"
+                                        FontAttributes="Bold"
+                                        TextColor="White"
+                                        Margin="0,10,0,0"
+                                        HeightRequest="50"
+                                        CornerRadius="10">
+									<Button.Background>
+										<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+											<GradientStop Color="#667eea" Offset="0.0" />
+											<GradientStop Color="#764ba2" Offset="1.0" />
+										</LinearGradientBrush>
+									</Button.Background>
+								</Button>
+
+							</VerticalStackLayout>
+						</ScrollView>
+					</Border>
+				</DataTemplate>
+			</CarouselView.ItemTemplate>
+		</CarouselView>
+
+		<!-- Indicator View -->
+		<IndicatorView x:Name="indicatorView"
+                       Grid.Row="2"
+                       IndicatorColor="LightGray"
+                       SelectedIndicatorColor="White"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,0"/>
+	</Grid>
 </ContentPage>

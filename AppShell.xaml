@@ -23,5 +23,10 @@
 			<ShellContent ContentTemplate="{DataTemplate local:ShoppingListPage}" />
 		</Tab>						
 	</FlyoutItem>
+	<FlyoutItem Title="Settings" Icon="list.png">
+		<Tab>
+			<ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
+		</Tab>
+	</FlyoutItem>
 
 </Shell>

@@ -26,17 +26,20 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 		private ObservableCollection<Recipe> lunchOptions;
 		private ObservableCollection<Recipe> dinnerOptions;
 		private ObservableCollection<Recipe> snacksOptions;
+
+		private RecipeStoreService _recipeStoreService;
 		public ICommand SaveMealCommand { get; }
 
 		private readonly RecipeApiService _mealSearchService;
 
-		public MealPlannerViewModel()
+		public MealPlannerViewModel(RecipeStoreService recipeStoreService)
 		{
 			// Initialize your service - inject via DI in real app
 			_mealSearchService = new RecipeApiService(); // Replace with your actual service
 
 			SaveMealCommand = new Command<DayMeal>(SaveMeal);
-			
+
+			_recipeStoreService = recipeStoreService;
 			InitializeDays();
 			
 		}
@@ -115,9 +118,8 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 		{
 			if (day != null)
 			{
-				// Here you can save to database or preferences
-				// Example: Save to Preferences
-				SaveToPreferences(day);
+
+				_recipeStoreService.DayMeals.Add(day);
 
 				// Show confirmation
 				await Application.Current.MainPage.DisplayAlert(
@@ -126,30 +128,6 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 					"OK");
 			}
 		}
-
-		private void SaveToPreferences(DayMeal day)
-		{
-		// Save to local preferences
-		Preferences.Set($"{day.DayName}_Breakfast", day.Breakfast.Name ?? "");
-		Preferences.Set($"{day.DayName}_Lunch", day.Lunch.Name ?? "");
-		Preferences.Set($"{day.DayName}_Dinner", day.Dinner.Name?? "");
-		Preferences.Set($"{day.DayName}_Snacks", day.Snacks.Name ?? "");
-		}
-
-		//private void LoadFromPreferences(DayMeal day)
-		//{
-		// Load from local preferences
-		//day.Breakfast = Preferences.Get($"{day.DayName}_Breakfast", "");
-		//day.Lunch = Preferences.Get($"{day.DayName}_Lunch", "");
-		//day.Dinner = Preferences.Get($"{day.DayName}_Dinner", "");
-		//day.Snacks = Preferences.Get($"{day.DayName}_Snacks", "");
-
-		// Set to null if empty string to hide the selected meal box
-		//if (string.IsNullOrWhiteSpace(day.Breakfast)) day.Breakfast = null;
-		//if (string.IsNullOrWhiteSpace(day.Lunch)) day.Lunch = null;
-		//if (string.IsNullOrWhiteSpace(day.Dinner)) day.Dinner = null;
-		//if (string.IsNullOrWhiteSpace(day.Snacks)) day.Snacks = null;
-		//}
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
 		{

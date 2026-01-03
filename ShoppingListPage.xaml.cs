@@ -1,9 +1,13 @@
+using Montealegre_Sofia_RecipeDiscover.ViewModels;
+using Montealegre_Sofia_RecipeDiscover.Services;
+
 namespace Montealegre_Sofia_RecipeDiscover;
 
 public partial class ShoppingListPage : ContentPage
 {
-	public ShoppingListPage()
+	public ShoppingListPage(RecipeStoreService recipeStoreService)
 	{
 		InitializeComponent();
+		BindingContext = new ShoppingListViewModel(recipeStoreService);
 	}
 }

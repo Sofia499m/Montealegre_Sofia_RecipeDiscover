@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Montealegre_Sofia_RecipeDiscover.SettingsPage"
+             Title="SettingsPage">
+	<ScrollView>
+		<VerticalStackLayout Padding="20" Spacing="24">
+
+			<!-- Dietary Preferences -->
+			<Label Text="Dietary Preferences"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+
+			<HorizontalStackLayout Spacing="8">
+				<CheckBox IsChecked="{Binding IsVegetarian}" />
+				<Label Text="Vegetarian" />
+			</HorizontalStackLayout>
+
+			<!-- Measurement Units -->
+			<Label Text="Measurement Units"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+
+			<Picker
+                Title="Select unit system"
+                ItemsSource="{Binding MeasurementUnits}"
+                SelectedItem="{Binding SelectedMeasurementUnit}" />
+
+			<!-- Meals Per Day -->
+			<Label Text="Select Meals"
+				   FontSize="18"
+				   FontAttributes="Bold"/>
+			<HorizontalStackLayout>
+				<CheckBox IsChecked="{Binding yesBreakfast}" />
+				<Label Text="Breakfast" />
+
+				<CheckBox IsChecked="{Binding yesLunch}" />
+				<Label Text="Lunch" />
+
+				<CheckBox IsChecked="{Binding yesDinner}" />
+				<Label Text="Dinner" />
+
+				<CheckBox IsChecked="{Binding yesSnacks}" />
+				<Label Text="Snacks" />
+			</HorizontalStackLayout>
+
+			<!-- Theme -->
+			<Label Text="App Theme"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+
+			<Switch IsToggled="{Binding IsEnabled}"
+					OnColor = "Black"
+					ThumbColor="White" />
+			<!-- Save Button -->
+			<Button
+                Text="Save Settings"
+                Command="{Binding SaveCommand}"
+                Margin="0,20,0,0" />
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>

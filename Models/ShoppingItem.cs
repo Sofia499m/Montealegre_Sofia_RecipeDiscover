@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
-	public class Ingredient
+	internal class ShoppingItem
 	{
 		public string Name { get; set; }
-		public string Measure { get; set; }
+		public double? TotalQuantity { get; set; }
+		public string Unit { get; set; }
 	}
 }

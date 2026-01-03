@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Montealegre_Sofia_RecipeDiscover.Services;
 
 namespace Montealegre_Sofia_RecipeDiscover
 {
@@ -14,9 +15,10 @@ namespace Montealegre_Sofia_RecipeDiscover
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+			builder.Services.AddSingleton<RecipeStoreService>();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+			builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

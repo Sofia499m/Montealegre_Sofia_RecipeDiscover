@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
-	internal class Recipe
+	public class Recipe
 	{
 		public string Id { get; set; }
 		public string Name { get; set; }

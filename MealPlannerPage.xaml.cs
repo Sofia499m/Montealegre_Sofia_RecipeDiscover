@@ -1,4 +1,5 @@
 using Montealegre_Sofia_RecipeDiscover.Models;
+using Montealegre_Sofia_RecipeDiscover.Services;
 using Montealegre_Sofia_RecipeDiscover.ViewModels;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -9,11 +10,12 @@ public partial class MealPlannerPage : ContentPage
 {
 	private MealPlannerViewModel viewModel;
 
-	public MealPlannerPage()
+	public MealPlannerPage(RecipeStoreService recipeStore)
 	{
 		InitializeComponent();
-		viewModel = new MealPlannerViewModel();
+		viewModel = new MealPlannerViewModel(recipeStore);
 		BindingContext = viewModel;
+
 	}
 
 	private async void OnSearchBreakfastClicked(object sender, TextChangedEventArgs e)

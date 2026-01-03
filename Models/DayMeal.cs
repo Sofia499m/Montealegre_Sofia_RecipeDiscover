@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
-	internal class DayMeal : INotifyPropertyChanged
+	public class DayMeal : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 

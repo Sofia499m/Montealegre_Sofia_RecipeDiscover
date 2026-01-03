@@ -4,25 +4,43 @@
              x:Class="Montealegre_Sofia_RecipeDiscover.ShoppingListPage"
              Title="">
 	<VerticalStackLayout Padding="16" Spacing="16">
-		<Label Text="Shopping Cart" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Padding="20"/>
+		<Label Text="Shopping List" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Padding="20"/>
+		<Grid RowDefinitions="Auto,*" Padding="10">
+			<Grid Grid.Row="0"
+			  ColumnDefinitions="*,Auto,Auto"
+			  Padding="10">
 
-		<Button Text="Add Item" />
+				<Label Text="Ingredient"
+               FontAttributes="Bold" />
 
-		<CollectionView ItemsSource="{Binding Items}">
-			<CollectionView.ItemTemplate>
-				<DataTemplate>
-					<Grid ColumnDefinitions="40,*">
+				<Label Grid.Column="1"
+               Text="Qty"
+               FontAttributes="Bold"
+               HorizontalOptions="End" />
 
-						<CheckBox IsChecked="{Binding IsChecked}" />
-
-						<Label 
-                            Grid.Column="1"
-                            Text="{Binding Name}" 
-                            TextDecorations="{Binding IsChecked, Converter={StaticResource StrikeThroughConverter}}" />
-					</Grid>
-				</DataTemplate>
-			</CollectionView.ItemTemplate>
-		</CollectionView>
-
+				<Label Grid.Column="2"
+               Text="Unit"
+               FontAttributes="Bold"
+               Margin="5,0,0,0" />
+			</Grid>
+			<CollectionView Grid.Row="1"
+							ItemsSource="{Binding ShoppingItems}">
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<Grid ColumnDefinitions="*,Auto,Auto" Padding="10">
+							<Label Text="{Binding Name}" />
+							<Label 
+								Grid.Column="1"
+								Text="{Binding TotalQuantity}"
+								HorizontalOptions="End" />
+							<Label 
+								Grid.Column="2"
+								Text="{Binding Unit}"
+								Margin="5,0,0,0" />
+						</Grid>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+		</Grid>
 	</VerticalStackLayout>
 </ContentPage>

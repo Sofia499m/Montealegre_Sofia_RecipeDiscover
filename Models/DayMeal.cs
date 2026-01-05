@@ -123,6 +123,11 @@ namespace Montealegre_Sofia_RecipeDiscover.Models
 			}
 		}
 
+		public bool ShowBreakfast { get; set; } = true;
+		public bool ShowLunch { get; set; } = true;
+		public bool ShowDinner { get; set; } = true;
+		public bool ShowSnacks { get; set; } = true;
+
 		public string SaveButtonText => $"Save {DayName}'s Meals";
 
 		public string DateInfo => $"Week of {DateTime.Now.ToString("MMMM yyyy")}";

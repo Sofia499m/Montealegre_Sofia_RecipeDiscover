@@ -11,51 +11,117 @@
                    FontSize="18"
                    FontAttributes="Bold" />
 
-			<HorizontalStackLayout Spacing="8">
-				<CheckBox IsChecked="{Binding IsVegetarian}" />
-				<Label Text="Vegetarian" />
-			</HorizontalStackLayout>
+			<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+				  ColumnDefinitions="100,Auto"
+				  RowSpacing="10">
+
+				<Label Grid.Row="0" Text="🥗 Vegetarian" VerticalOptions="Center"/>
+				<Switch Grid.Row="0" Grid.Column="1"
+						IsToggled="{Binding IsVegetarianEnabled}"/>
+
+				<Label Grid.Row="1" Text="🐖 Pork" VerticalOptions="Center" />
+				<Switch Grid.Row="1" Grid.Column="1"
+						IsToggled="{Binding IsPorkEnabled}"/>
+
+				<Label Grid.Row="2" Text="🥩 Beef" VerticalOptions="Center" />
+				<Switch Grid.Row="2" Grid.Column="1" 
+						IsToggled="{Binding IsBeefEnabled}" />
+
+				<Label Grid.Row="3" Text="🐟 Seafood" VerticalOptions="Center" />
+				<Switch Grid.Row="3" Grid.Column="1"
+						IsToggled="{Binding IsSeafoodEnabled}" />
+
+				<Label Grid.Row="4" Text="🍗 Chicken" VerticalOptions="Center" />
+				<Switch Grid.Row="4" Grid.Column="1"
+						IsToggled="{Binding IsChickenEnabled}"/>
+
+				<Label Grid.Row="5" Text="🍬 SugarFree" VerticalOptions="Center" />
+				<Switch Grid.Row="5" Grid.Column="1"
+					    IsToggled="{Binding IsSugarFreeEnabled}"/>
+			</Grid>
 
 			<!-- Measurement Units -->
 			<Label Text="Measurement Units"
                    FontSize="18"
                    FontAttributes="Bold" />
 
-			<Picker
+			<Picker 
                 Title="Select unit system"
                 ItemsSource="{Binding MeasurementUnits}"
-                SelectedItem="{Binding SelectedMeasurementUnit}" />
+                SelectedItem="{Binding SelectedMeasurementUnit}"/>
 
-			<!-- Meals Per Day -->
+			<!-- Days -->
+			<Label Text="Select Days"
+				   FontSize="18"
+				   FontAttributes="Bold"/>
+			<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+				  ColumnDefinitions="100,Auto"
+				  RowSpacing="10">
+				
+				<Label Grid.Row="0" Text="Monday" />
+				<CheckBox Grid.Row="0" Grid.Column="1"
+							IsChecked="{Binding IsMondayChecked}"/>
+				
+				<Label Grid.Row="1" Text="Tuesday" />
+				<CheckBox Grid.Row="1" Grid.Column="1"
+						  IsChecked="{Binding IsTuesdayChecked}"/>
+
+				<Label Grid.Row="2" Text="Wednesday" />
+				<CheckBox Grid.Row="2" Grid.Column="1"
+						  IsChecked="{Binding IsWednesdayChecked}"/>
+
+				<Label Grid.Row="3" Text="Thursday" />
+				<CheckBox Grid.Row="3" Grid.Column="1"
+						  IsChecked="{Binding IsThursdayChecked}"/>
+
+				<Label Grid.Row="4" Text="Friday" />
+				<CheckBox Grid.Row="4" Grid.Column="1"
+						  IsChecked="{Binding IsFridayChecked}"/>
+
+				<Label Grid.Row="5" Text="Saturday" />
+				<CheckBox Grid.Row="5" Grid.Column="1"
+						  IsChecked="{Binding IsSaturdayChecked}"/>
+
+				<Label Grid.Row="6" Text="Sunday" />
+				<CheckBox Grid.Row="6" Grid.Column="1"
+						  IsChecked="{Binding IsSundayChecked}"/>
+			</Grid>
+			<!-- Meals -->
 			<Label Text="Select Meals"
 				   FontSize="18"
 				   FontAttributes="Bold"/>
-			<HorizontalStackLayout>
-				<CheckBox IsChecked="{Binding yesBreakfast}" />
-				<Label Text="Breakfast" />
+			<Grid RowDefinitions="Auto,Auto,Auto,Auto"
+				  ColumnDefinitions="100,Auto"
+				  RowSpacing="10">
 
-				<CheckBox IsChecked="{Binding yesLunch}" />
-				<Label Text="Lunch" />
+				<Label Grid.Row="0" Text="Breakfast" />
+				<CheckBox Grid.Row="0" Grid.Column="1"
+						  IsChecked="{Binding IsBreakfastChecked}"/>
 
-				<CheckBox IsChecked="{Binding yesDinner}" />
-				<Label Text="Dinner" />
+				<Label Grid.Row="1" Text="Lunch" />
+				<CheckBox Grid.Row="1" Grid.Column="1"
+						  IsChecked="{Binding IsLunchChecked}"/>
 
-				<CheckBox IsChecked="{Binding yesSnacks}" />
-				<Label Text="Snacks" />
-			</HorizontalStackLayout>
+				<Label Grid.Row="2" Text="Dinner" />
+				<CheckBox Grid.Row="2" Grid.Column="1"
+						  IsChecked="{Binding IsDinnerChecked}"/>
 
+				<Label Grid.Row="3" Text="Snacks" />
+				<CheckBox Grid.Row="3" Grid.Column="1"
+						  IsChecked="{Binding IsSnackChecked}"/>
+			</Grid>
 			<!-- Theme -->
 			<Label Text="App Theme"
                    FontSize="18"
                    FontAttributes="Bold" />
 
-			<Switch IsToggled="{Binding IsEnabled}"
-					OnColor = "Black"
-					ThumbColor="White" />
+			<Picker
+					ItemsSource="{Binding ThemeModeColor}"
+					SelectedItem="{Binding ThemeModeColorSelected}" />
 			<!-- Save Button -->
 			<Button
                 Text="Save Settings"
-                Command="{Binding SaveCommand}"
+                Command="{Binding SaveSettingsCommand}"
                 Margin="0,20,0,0" />
 
 		</VerticalStackLayout>

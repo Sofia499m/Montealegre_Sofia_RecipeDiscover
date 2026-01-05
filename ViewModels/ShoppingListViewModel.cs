@@ -17,13 +17,16 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 	{
 
 		private RecipeStoreService _recipeStoreService;
+		private SettingsService _settingsService;
 		private RecipeApiService recipeApiService;
 		public ObservableCollection<ShoppingItem> ShoppingItems { get; set; }
-		public ShoppingListViewModel(RecipeStoreService recipeStoreService)
+		public ShoppingListViewModel(RecipeStoreService recipeStoreService, SettingsService settingsService)
 		{
 			_recipeStoreService = recipeStoreService;
+			_settingsService = settingsService;
 			recipeApiService = new RecipeApiService();
 			ShoppingItems = new ObservableCollection<ShoppingItem>();
+			_settingsService.SettingsChanged += OnSettingsChangedShoppingList;
 			getAllIngredients();
 		}
 
@@ -44,6 +47,10 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 				foreach (var ingredient in recipe.ingredients)
 				{
 					var ingredientMeasure = parseMeasure(ingredient.Measure);
+					if (_settingsService.AppSettings.MeasurmentUnits.Equals("Imperial"))
+					{
+						ingredientMeasure = ConvertToImperial(ingredientMeasure);
+					}
 					items.Add(new ShoppingItem() { 
 						Name = ingredient.Name,
 						Unit = ingredientMeasure.Unit,
@@ -132,6 +139,51 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 			{
 				Description = input
 			};
+		}
+
+		private async void OnSettingsChangedShoppingList(object sender, EventArgs e)
+		{
+			await getAllIngredients();
+		}
+
+		private ParsedMeasure ConvertToImperial(ParsedMeasure metric)
+		{
+			if (metric == null || metric.Quantity == null)
+				return metric;
+
+			switch (metric.Unit)
+			{
+				case "g":
+					return new ParsedMeasure
+					{
+						Quantity = metric.Quantity * 0.035274,
+						Unit = "oz"
+					};
+
+				case "kg":
+					return new ParsedMeasure
+					{
+						Quantity = metric.Quantity * 2.20462,
+						Unit = "lb"
+					};
+
+				case "ml":
+					return new ParsedMeasure
+					{
+						Quantity = metric.Quantity * 0.033814,
+						Unit = "fl oz"
+					};
+
+				case "l":
+					return new ParsedMeasure
+					{
+						Quantity = metric.Quantity * 33.814,
+						Unit = "fl oz"
+					};
+
+				default:
+					return metric; // tsp, tbsp, unit, etc.
+			}
 		}
 
 		public event PropertyChangedEventHandler? PropertyChanged;

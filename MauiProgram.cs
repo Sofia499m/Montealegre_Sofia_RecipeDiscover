@@ -16,6 +16,7 @@ namespace Montealegre_Sofia_RecipeDiscover
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 			builder.Services.AddSingleton<RecipeStoreService>();
+			builder.Services.AddSingleton<SettingsService>();
 
 #if DEBUG
 			builder.Logging.AddDebug();

@@ -68,8 +68,9 @@
 								</VerticalStackLayout>
 
 								<!-- Breakfast -->
-								<VerticalStackLayout Spacing="8">
-									<Label Text="🍽️ Breakfast"
+								<VerticalStackLayout Spacing="8"
+													 IsVisible="{Binding ShowBreakfast}">
+									<Label Text="🍳 Breakfast"
                                            FontSize="18"
                                            FontAttributes="Bold"
                                            TextColor="#764ba2"/>
@@ -89,8 +90,9 @@
 								</VerticalStackLayout>
 
 								<!-- Lunch -->
-								<VerticalStackLayout Spacing="8">
-									<Label Text="🍽️ Lunch"
+								<VerticalStackLayout Spacing="8" 
+													 IsVisible="{Binding ShowLunch}">
+									<Label Text="🥗 Lunch"
                                            FontSize="18"
                                            FontAttributes="Bold"
                                            TextColor="#764ba2"/>
@@ -110,43 +112,45 @@
 								</VerticalStackLayout>
 
 								<!-- Dinner -->
-								<VerticalStackLayout Spacing="8">
-									<Label Text="🍽️ Dinner"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           TextColor="#764ba2"/>
+								<VerticalStackLayout Spacing="8"
+													IsVisible="{Binding ShowDinner}">
+									<Label Text="🍝 Dinner"
+                                        FontSize="18"
+                                        FontAttributes="Bold"
+                                        TextColor="#764ba2"/>
 									<Border Stroke="#e0e0e0"
-                                            StrokeThickness="2"
-                                            BackgroundColor="White"
-                                            StrokeShape="RoundRectangle 10">
+                                        StrokeThickness="2"
+                                        BackgroundColor="White"
+                                        StrokeShape="RoundRectangle 10">
 										<Grid ColumnDefinitions="*,Auto" Padding="5">
 											<Picker Grid.Column="0"
-                                                    ItemsSource="{Binding DinnerOptions}"
-													ItemDisplayBinding="{Binding Name}"
-                                                    SelectedItem="{Binding Dinner}"
-                                                    FontSize="16"
-                                                    TextColor="#333"/>
+                                                ItemsSource="{Binding DinnerOptions}"
+												ItemDisplayBinding="{Binding Name}"
+                                                SelectedItem="{Binding Dinner}"
+                                                FontSize="16"
+                                                TextColor="#333"/>
 										</Grid>
 									</Border>
 								</VerticalStackLayout>
 
 								<!-- Snacks -->
-								<VerticalStackLayout Spacing="8">
-									<Label Text="🍽️ Snacks"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           TextColor="#764ba2"/>
+								<VerticalStackLayout Spacing="8"
+													IsVisible="{Binding ShowSnacks}">
+									<Label Text="🍎 Snacks"
+                                        FontSize="18"
+                                        FontAttributes="Bold"
+                                        TextColor="#764ba2"/>
 									<Border Stroke="#e0e0e0"
-                                            StrokeThickness="2"
-                                            BackgroundColor="White"
-                                            StrokeShape="RoundRectangle 10">
+                                        StrokeThickness="2"
+                                        BackgroundColor="White"
+                                        StrokeShape="RoundRectangle 10">
 										<Grid ColumnDefinitions="*,Auto" Padding="5">
 											<Picker Grid.Column="0"
-                                                    ItemsSource="{Binding SnacksOptions}"
-													ItemDisplayBinding="{Binding Name}"
-                                                    SelectedItem="{Binding Snacks}"
-                                                    FontSize="16"
-                                                    TextColor="#333"/>
+                                                ItemsSource="{Binding SnacksOptions}"
+												ItemDisplayBinding="{Binding Name}"
+                                                SelectedItem="{Binding Snacks}"
+                                                FontSize="16"
+                                                TextColor="#333"/>
 										</Grid>
 									</Border>
 								</VerticalStackLayout>
@@ -161,13 +165,13 @@
                                         Margin="0,10,0,0"
                                         HeightRequest="50"
                                         CornerRadius="10">
-									<Button.Background>
-										<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-											<GradientStop Color="#667eea" Offset="0.0" />
-											<GradientStop Color="#764ba2" Offset="1.0" />
-										</LinearGradientBrush>
-									</Button.Background>
-								</Button>
+										<Button.Background>
+											<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+												<GradientStop Color="#667eea" Offset="0.0" />
+												<GradientStop Color="#764ba2" Offset="1.0" />
+											</LinearGradientBrush>
+										</Button.Background>
+									</Button>
 
 							</VerticalStackLayout>
 						</ScrollView>

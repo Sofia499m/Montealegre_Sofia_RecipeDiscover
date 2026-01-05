@@ -14,6 +14,8 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 	{
 		private readonly HttpClient _client;
 
+		private readonly Dictionary<string, object> _cache = new();
+
 		public RecipeApiService()
 		{
 			_client = new HttpClient();
@@ -21,6 +23,15 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 
 		public async Task<List<Recipe>> SearchRecipes(string query)
 		{
+			if (string.IsNullOrWhiteSpace(query))
+				return new List<Recipe>();
+
+			// Check cache first
+			if (_cache.ContainsKey(query))
+			{
+				return (List<Recipe>)_cache[query];
+			}
+
 			string url = $"https://www.themealdb.com/api/json/v1/1/search.php?s={query}";
 
 			var response = await _client.GetStringAsync(url);
@@ -29,8 +40,13 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 
 			List<Recipe> result = new List<Recipe>();
 			foreach (var meal in results.Meals) {
+				meal.strInstructions = meal.strInstructions.Replace("\t"," ");
 				result.Add(GetRecipeFromMeal(meal));
 			}
+
+			// Save to cache
+			_cache[query] = result;
+
 			return result;
 		}
 
@@ -111,17 +127,31 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 		{
 			List<Recipe> meals = new List<Recipe>();
 			foreach (var category in categories) {
+				if (string.IsNullOrWhiteSpace(category))
+					continue;
+
+				// Check cache
+				if (_cache.ContainsKey(category))
+				{
+					meals.AddRange((List<Recipe>)_cache[category]);
+					continue;
+				}
+
+				Debug.WriteLine($"Category: {category}");
 				string url = $"https://www.themealdb.com/api/json/v1/1/filter.php?c={category}";
 				var response = await _client.GetStringAsync(url);
 
 				var results = JsonSerializer.Deserialize<MealDbResponse>(response);
 
-				
-				foreach (var meal in results.Meals)
-				{
-					var recipe = GetRecipeFromCategory(meal);
-					meals.Add(recipe);
-				}
+				List<Recipe> categoryMeals = results.Meals
+					.Select(meal => GetRecipeFromCategory(meal))
+					.ToList();
+
+				meals.AddRange(categoryMeals);
+
+				// Save to cache
+				_cache[category] = categoryMeals;
+
 			}
 			
 

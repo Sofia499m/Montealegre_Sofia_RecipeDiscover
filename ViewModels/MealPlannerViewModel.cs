@@ -22,17 +22,18 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 
 		public ObservableCollection<DayMeal> Days { get; set; }
 
-		private ObservableCollection<Recipe> breakfastOptions;
-		private ObservableCollection<Recipe> lunchOptions;
-		private ObservableCollection<Recipe> dinnerOptions;
-		private ObservableCollection<Recipe> snacksOptions;
+		private ObservableCollection<Recipe> _breakfastOptions;
+		private ObservableCollection<Recipe> _lunchOptions;
+		private ObservableCollection<Recipe> _dinnerOptions;
+		private ObservableCollection<Recipe> _snacksOptions;
 
 		private RecipeStoreService _recipeStoreService;
 		public ICommand SaveMealCommand { get; }
 
 		private readonly RecipeApiService _mealSearchService;
+		private readonly SettingsService _settingsService;
 
-		public MealPlannerViewModel(RecipeStoreService recipeStoreService)
+		public MealPlannerViewModel(RecipeStoreService recipeStoreService, SettingsService settingsService)
 		{
 			// Initialize your service - inject via DI in real app
 			_mealSearchService = new RecipeApiService(); // Replace with your actual service
@@ -40,78 +41,74 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 			SaveMealCommand = new Command<DayMeal>(SaveMeal);
 
 			_recipeStoreService = recipeStoreService;
+			_settingsService = settingsService;
+
+			_settingsService.SettingsChanged += OnSettingsChanged;
+
 			InitializeDays();
 			
 		}
 
+		private DayMeal CreateDay(string dayName) =>
+			new DayMeal
+			{
+				DayName = dayName,
+				BreakfastOptions = _breakfastOptions,
+				LunchOptions = _lunchOptions,
+				DinnerOptions = _dinnerOptions,
+				SnacksOptions = _snacksOptions,
+
+				ShowBreakfast = _settingsService.AppSettings.Meals.Breakfast,
+				ShowLunch = _settingsService.AppSettings.Meals.Lunch,
+				ShowDinner = _settingsService.AppSettings.Meals.Dinner,
+				ShowSnacks = _settingsService.AppSettings.Meals.Snacks
+			};
+
 		private async Task InitializeDays()
 		{
 			await InitializeMealsOptions();
-			Days = new ObservableCollection<DayMeal>
-			{
-				new DayMeal { DayName = "Monday", BreakfastOptions = breakfastOptions, LunchOptions = lunchOptions, DinnerOptions = dinnerOptions, SnacksOptions = snacksOptions},
-				new DayMeal { DayName = "Tuesday", BreakfastOptions = breakfastOptions, LunchOptions = lunchOptions, DinnerOptions = dinnerOptions, SnacksOptions = snacksOptions},
-				new DayMeal { DayName = "Wednesday", BreakfastOptions = breakfastOptions, LunchOptions = lunchOptions, DinnerOptions = dinnerOptions, SnacksOptions = snacksOptions },
-				new DayMeal { DayName = "Thursday", BreakfastOptions = breakfastOptions, LunchOptions = lunchOptions, DinnerOptions = dinnerOptions, SnacksOptions = snacksOptions },
-				new DayMeal { DayName = "Friday", BreakfastOptions = breakfastOptions, LunchOptions = lunchOptions, DinnerOptions = dinnerOptions, SnacksOptions = snacksOptions },
-				new DayMeal { DayName = "Saturday", BreakfastOptions = breakfastOptions, LunchOptions = lunchOptions, DinnerOptions = dinnerOptions, SnacksOptions = snacksOptions },
-				new DayMeal { DayName = "Sunday", BreakfastOptions = breakfastOptions, LunchOptions = lunchOptions, DinnerOptions = dinnerOptions, SnacksOptions = snacksOptions }
-			};
+
+			Days ??= new ObservableCollection<DayMeal>();
+			Days.Clear();
+
+			if (_settingsService.AppSettings.Days.Monday)
+				Days.Add(CreateDay("Monday"));
+
+			if (_settingsService.AppSettings.Days.Tuesday)
+				Days.Add(CreateDay("Tuesday"));
+
+			if (_settingsService.AppSettings.Days.Wednesday)
+				Days.Add(CreateDay("Wednesday"));
+
+			if (_settingsService.AppSettings.Days.Thursday)
+				Days.Add(CreateDay("Thursday"));
+
+			if (_settingsService.AppSettings.Days.Friday)
+				Days.Add(CreateDay("Friday"));
+
+			if (_settingsService.AppSettings.Days.Saturday)
+				Days.Add(CreateDay("Saturday"));
+
+			if (_settingsService.AppSettings.Days.Sunday)
+				Days.Add(CreateDay("Sunday"));
+
 			OnPropertyChanged(nameof(Days));
 		}
 
 		private async Task InitializeMealsOptions() 
 		{
 			Debug.WriteLine("Initializing Meals Options");
-			var breakfastCategories = new List<string> { "breakfast" };
-			var mainCoursesCategories = new List<string> { "Pork", "Seafood", "Beef", "Vegetarian", "Chicken" };
-			var snacksCategories = new List<string> { "Side", "Dessert", "Starter" };
-			var meals = await _mealSearchService.SearchRecipesByCategories(breakfastCategories);
-			foreach (var meal in meals)
-			{
-				Debug.WriteLine($"- {meal.Name}");
-			}
-			breakfastOptions = new ObservableCollection<Recipe>(meals);
-			meals = await _mealSearchService.SearchRecipesByCategories(mainCoursesCategories);
-			lunchOptions = new ObservableCollection<Recipe>(meals);
-			dinnerOptions = new ObservableCollection<Recipe>(meals);
-			meals = await _mealSearchService.SearchRecipesByCategories(snacksCategories);
-			snacksOptions = new ObservableCollection<Recipe>(meals);
+			var meals = await _mealSearchService.SearchRecipesByCategories(_settingsService.FoodCategories);
+		
+			_breakfastOptions = new ObservableCollection<Recipe>(meals);
+			_lunchOptions = new ObservableCollection<Recipe>(meals);
+			_dinnerOptions = new ObservableCollection<Recipe>(meals);
+			_snacksOptions = new ObservableCollection<Recipe>(meals);
 		}
 
-		public async Task SearchMealAsync(DayMeal day, string mealQuery, string mealType)
+		private async void OnSettingsChanged(object sender, EventArgs e)
 		{
-			if (day == null) return;
-
-			try
-			{
-				Debug.WriteLine("Llego aca 3." +mealType);
-				// Call service to get list of meals options
-				var meals = await _mealSearchService.SearchRecipes(mealQuery);
-
-				Debug.WriteLine("Meals " +meals.First());
-
-				// Update the appropriate options list based on meal query
-				switch (mealType)
-				{
-					case "Breakfast":
-						day.BreakfastOptions = new ObservableCollection<Recipe>(meals);
-						break;
-					case "Lunch":
-						day.LunchOptions = new ObservableCollection<Recipe>(meals);
-						break;
-					case "Dinner":
-						day.DinnerOptions = new ObservableCollection<Recipe>(meals);
-						break;
-					case "Snacks":
-						day.SnacksOptions = new ObservableCollection<Recipe>(meals);
-						break;
-				}
-			}
-			catch (Exception ex)
-			{
-				await Application.Current.MainPage.DisplayAlert("Error", $"Failed to load meals: {ex.Message}", "OK");
-			}
+			await InitializeDays();
 		}
 
 		private async void SaveMeal(DayMeal day)

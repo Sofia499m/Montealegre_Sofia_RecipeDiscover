@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using static Microsoft.Maui.ApplicationModel.Permissions;
@@ -38,7 +39,7 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 			// Initialize your service - inject via DI in real app
 			_mealSearchService = new RecipeApiService(); // Replace with your actual service
 
-			SaveMealCommand = new Command<DayMeal>(SaveMeal);
+			SaveMealCommand = new Command(SaveMeal);
 
 			_recipeStoreService = recipeStoreService;
 			_settingsService = settingsService;
@@ -111,19 +112,31 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 			await InitializeDays();
 		}
 
-		private async void SaveMeal(DayMeal day)
+		private async void SaveMeal()
 		{
-			if (day != null)
+			if (Days != null)
 			{
+				SaveWeeklyPlan();
 
-				_recipeStoreService.DayMeals.Add(day);
+				_recipeStoreService.DayMeals.Clear();
+				foreach (var day in Days)
+					_recipeStoreService.DayMeals.Add(day);
 
 				// Show confirmation
 				await Application.Current.MainPage.DisplayAlert(
 					"Success",
-					$"Meals for {day.DayName} saved successfully!",
+					$"Meals for week plan saved successfully!",
 					"OK");
 			}
+		}
+
+		private async Task SaveWeeklyPlan()
+		{
+			string filename = Path.Combine(FileSystem.Current.AppDataDirectory, $"weeklyPlan.json");
+			string jsonContents = JsonSerializer.Serialize(Days);
+			using FileStream outputStream = File.Create(filename);
+			using StreamWriter writer = new StreamWriter(outputStream);
+			await writer.WriteAsync(jsonContents);
 		}
 
 		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

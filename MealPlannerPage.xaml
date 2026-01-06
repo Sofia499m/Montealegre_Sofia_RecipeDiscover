@@ -155,31 +155,12 @@
 									</Border>
 								</VerticalStackLayout>
 
-								<!-- Save Button -->
-								<Button Text="{Binding SaveButtonText}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SaveMealCommand}"
-                                        CommandParameter="{Binding .}"
-                                        FontSize="18"
-                                        FontAttributes="Bold"
-                                        TextColor="White"
-                                        Margin="0,10,0,0"
-                                        HeightRequest="50"
-                                        CornerRadius="10">
-										<Button.Background>
-											<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-												<GradientStop Color="#667eea" Offset="0.0" />
-												<GradientStop Color="#764ba2" Offset="1.0" />
-											</LinearGradientBrush>
-										</Button.Background>
-									</Button>
-
 							</VerticalStackLayout>
 						</ScrollView>
 					</Border>
 				</DataTemplate>
 			</CarouselView.ItemTemplate>
 		</CarouselView>
-
 		<!-- Indicator View -->
 		<IndicatorView x:Name="indicatorView"
                        Grid.Row="2"
@@ -187,5 +168,23 @@
                        SelectedIndicatorColor="White"
                        HorizontalOptions="Center"
                        Margin="0,20,0,0"/>
+		<!-- Save Button -->
+		<Button Grid.Row="3" 
+				Text="Save Week Meals"
+				Command="{Binding SaveMealCommand}"
+				CommandParameter="{Binding .}"
+				FontSize="18"
+				FontAttributes="Bold"
+				TextColor="White"
+				Margin="0,10,0,0"
+				HeightRequest="50"
+				CornerRadius="10">
+				<Button.Background>
+					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+						<GradientStop Color="DarkSalmon" Offset="0.0" />
+						<GradientStop Color="Aquamarine" Offset="1.0" />
+					</LinearGradientBrush>
+				</Button.Background>
+		</Button>
 	</Grid>
 </ContentPage>

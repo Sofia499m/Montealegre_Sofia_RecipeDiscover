@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
+	//Data from API
 	internal class Meals
 	{
 		public string idMeal { get; set; }

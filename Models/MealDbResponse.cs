@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
+	//Saving recipies to a list
 	internal class MealDbResponse
 	{
 		[JsonPropertyName("meals")]

@@ -10,7 +10,9 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 {
 	public class SettingsService
 	{
+		//Holds all application settings
 		public AppSettings AppSettings { get; set; } = new();
+		//List of food categories currently enabled for filtering recipes
 		public List<string> FoodCategories { get; set; } = new List<string> {
 			"breakfast", 
 			"Pork", 
@@ -22,16 +24,19 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 			"Dessert",
 			"Starter"
 		};
-
+		//Event to notify subscribers that settings have changed
 		public event EventHandler SettingsChanged;
-
+		//Saves current settings and updates the FoodCategories list
 		public void Save()
 		{
+			//Reset the FoodCategories list
 			FoodCategories = new List<string>();
-			FoodCategories.Clear();
+			FoodCategories.Clear();//Extra clear just to be safe (optional)
 
+			//Always include breakfast
 			FoodCategories.Add("breakfast");
 
+			//Conditionally add enabled food categories based on AppSettings
 			if (AppSettings.FoodCategories.Pork)
 				FoodCategories.Add("Pork");
 
@@ -52,18 +57,16 @@ namespace Montealegre_Sofia_RecipeDiscover.Services
 
 
 			if (AppSettings.FoodCategories.SugarFree)
-				FoodCategories.Add("Dessert");
+				FoodCategories.Add("Dessert");//SugarFree maps to Dessert here
 
-
+			//Always include these categories regardless of settings
 			FoodCategories.Add("Side");
 			FoodCategories.Add("Starter");
 
-			// Save to Preferences / storage
+			//Optionally: Save settings to persistent storage (Preferences, file, database, etc.)
+			//Notify subscribers that settings have changed
 			SettingsChanged?.Invoke(this, EventArgs.Empty);
 		}
-		
-
-
 
 	}
 }

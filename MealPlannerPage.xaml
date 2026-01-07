@@ -3,16 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Montealegre_Sofia_RecipeDiscover.MealPlannerPage"
              Title="">
-	<ContentPage.Resources>
-		<ResourceDictionary>
-			<LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="1,1">
-				<GradientStop Color="#667eea" Offset="0.0" />
-				<GradientStop Color="#764ba2" Offset="1.0" />
-			</LinearGradientBrush>
-		</ResourceDictionary>
-	</ContentPage.Resources>
 
-	<Grid Background="{StaticResource BackgroundGradient}" Padding="20">
+	<Grid Padding="20">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
@@ -21,10 +13,9 @@
 
 		<!-- Title -->
 		<Label Grid.Row="0"
-               Text="Weekly Meal Planner"
+               Text="📅Weekly Meal Planner"
                FontSize="32"
                FontAttributes="Bold"
-               TextColor="White"
                HorizontalOptions="Center"
                Margin="0,0,0,20"/>
 
@@ -35,11 +26,11 @@
                       PeekAreaInsets="40">
 			<CarouselView.ItemTemplate>
 				<DataTemplate>
-					<Border BackgroundColor="White"
-                            StrokeThickness="0"
-                            Padding="30"
-                            Margin="10"
-                            StrokeShape="RoundRectangle 20">
+					<Border BackgroundColor="DarkSalmon"
+                            StrokeShape="RoundRectangle 12" 
+							StrokeThickness="0" 
+							Margin="0,0,0,15"
+                            Padding="20">
 						<Border.Shadow>
 							<Shadow Brush="Black"
                                     Offset="0,10"
@@ -48,28 +39,31 @@
 						</Border.Shadow>
 
 						<ScrollView>
-							<VerticalStackLayout Spacing="20">
+							<VerticalStackLayout Spacing="20" Padding="20">
 
 								<!-- Day Header -->
 								<VerticalStackLayout Spacing="5">
 									<Label Text="{Binding DayName}"
                                            FontSize="36"
                                            FontAttributes="Bold"
-                                           TextColor="#667eea"
-                                           HorizontalOptions="Center"/>
+                                           TextColor="white"
+                                           HorizontalOptions="Center"
+										   />
 									<Label Text="{Binding DateInfo}"
                                            FontSize="14"
                                            TextColor="#666"
-                                           HorizontalOptions="Center"/>
+                                           HorizontalOptions="Center"
+										   />
 									<BoxView HeightRequest="3"
-                                             BackgroundColor="#667eea"
+                                             BackgroundColor="White"
                                              HorizontalOptions="Fill"
                                              Margin="0,10,0,0"/>
 								</VerticalStackLayout>
 
 								<!-- Breakfast -->
 								<VerticalStackLayout Spacing="8"
-													 IsVisible="{Binding ShowBreakfast}">
+													 IsVisible="{Binding ShowBreakfast}"
+													 >
 									<Label Text="🍳 Breakfast"
                                            FontSize="18"
                                            FontAttributes="Bold"
@@ -115,13 +109,13 @@
 								<VerticalStackLayout Spacing="8"
 													IsVisible="{Binding ShowDinner}">
 									<Label Text="🍝 Dinner"
-                                        FontSize="18"
-                                        FontAttributes="Bold"
-                                        TextColor="#764ba2"/>
+										   FontSize="18"
+										   FontAttributes="Bold"
+										   TextColor="#764ba2"/>
 									<Border Stroke="#e0e0e0"
-                                        StrokeThickness="2"
-                                        BackgroundColor="White"
-                                        StrokeShape="RoundRectangle 10">
+											StrokeThickness="2"
+											BackgroundColor="White"
+											StrokeShape="RoundRectangle 10">
 										<Grid ColumnDefinitions="*,Auto" Padding="5">
 											<Picker Grid.Column="0"
                                                 ItemsSource="{Binding DinnerOptions}"
@@ -137,20 +131,20 @@
 								<VerticalStackLayout Spacing="8"
 													IsVisible="{Binding ShowSnacks}">
 									<Label Text="🍎 Snacks"
-                                        FontSize="18"
-                                        FontAttributes="Bold"
-                                        TextColor="#764ba2"/>
+										   FontSize="18"
+										   FontAttributes="Bold"
+										   TextColor="#764ba2"/>
 									<Border Stroke="#e0e0e0"
-                                        StrokeThickness="2"
-                                        BackgroundColor="White"
-                                        StrokeShape="RoundRectangle 10">
+											StrokeThickness="2"
+											BackgroundColor="White"
+											StrokeShape="RoundRectangle 10">
 										<Grid ColumnDefinitions="*,Auto" Padding="5">
 											<Picker Grid.Column="0"
-                                                ItemsSource="{Binding SnacksOptions}"
-												ItemDisplayBinding="{Binding Name}"
-                                                SelectedItem="{Binding Snacks}"
-                                                FontSize="16"
-                                                TextColor="#333"/>
+													ItemsSource="{Binding SnacksOptions}"
+													ItemDisplayBinding="{Binding Name}"
+													SelectedItem="{Binding Snacks}"
+													FontSize="16"
+													TextColor="#333"/>
 										</Grid>
 									</Border>
 								</VerticalStackLayout>

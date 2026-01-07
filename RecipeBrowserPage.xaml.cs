@@ -5,11 +5,12 @@ namespace Montealegre_Sofia_RecipeDiscover;
 
 public partial class RecipeBrowserPage : ContentPage
 {
-	public RecipeBrowserPage()
+	private RecipeBrowserViewModel _viewModel;
+	public RecipeBrowserPage(SettingsService settingsService)
 	{
 		InitializeComponent();
-		BindingContext = new RecipeBrowserViewModel();
+		_viewModel = new RecipeBrowserViewModel(settingsService);
+		BindingContext = _viewModel;
 	}
-
 
 }

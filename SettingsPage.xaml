@@ -9,7 +9,9 @@
 			<!-- Dietary Preferences -->
 			<Label Text="Dietary Preferences"
                    FontSize="18"
-                   FontAttributes="Bold" />
+                   FontAttributes="Bold" 
+				   BackgroundColor="LightSalmon"
+				   TextColor="Black"/>
 
 			<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
 				  ColumnDefinitions="100,Auto"
@@ -43,17 +45,21 @@
 			<!-- Measurement Units -->
 			<Label Text="Measurement Units"
                    FontSize="18"
-                   FontAttributes="Bold" />
+                   FontAttributes="Bold" 
+				   BackgroundColor="LightSalmon"
+				   TextColor="Black"/>
 
 			<Picker 
-                Title="Select unit system"
+                BackgroundColor="DarkGray"
                 ItemsSource="{Binding MeasurementUnits}"
                 SelectedItem="{Binding SelectedMeasurementUnit}"/>
 
 			<!-- Days -->
 			<Label Text="Select Days"
 				   FontSize="18"
-				   FontAttributes="Bold"/>
+				   FontAttributes="Bold"
+				   BackgroundColor="LightSalmon"
+				   TextColor="Black"/>
 			<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
 				  ColumnDefinitions="100,Auto"
 				  RowSpacing="10">
@@ -89,7 +95,9 @@
 			<!-- Meals -->
 			<Label Text="Select Meals"
 				   FontSize="18"
-				   FontAttributes="Bold"/>
+				   FontAttributes="Bold"
+				   BackgroundColor="LightSalmon"
+				   TextColor="Black"/>
 			<Grid RowDefinitions="Auto,Auto,Auto,Auto"
 				  ColumnDefinitions="100,Auto"
 				  RowSpacing="10">
@@ -113,9 +121,11 @@
 			<!-- Theme -->
 			<Label Text="App Theme"
                    FontSize="18"
-                   FontAttributes="Bold" />
+                   FontAttributes="Bold" 
+				   BackgroundColor="LightSalmon"
+				   TextColor="Black"/>
 
-			<Picker
+			<Picker BackgroundColor="DarkGray"
 					ItemsSource="{Binding ThemeModeColor}"
 					SelectedItem="{Binding ThemeModeColorSelected}" />
 			<!-- Save Button -->

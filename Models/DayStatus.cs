@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
+	//Properties and Files to The Days of the Week
 	public class DayStatus : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;

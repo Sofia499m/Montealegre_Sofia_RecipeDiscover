@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
+	//Files and Properties To FoodCategories
 	public class FoodCategories : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;

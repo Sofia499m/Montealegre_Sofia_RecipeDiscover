@@ -8,22 +8,22 @@
     Title="Montealegre_Sofia_RecipeDiscover">
 
 	<!-- Bottom Tabs -->
-	<FlyoutItem Title="Browse Recipes" Icon="search.png">
+	<FlyoutItem Title="🔍Browse Recipes">
 		<Tab>
 			<ShellContent ContentTemplate="{DataTemplate local:RecipeBrowserPage}" />
 		</Tab>
 	</FlyoutItem>
-	<FlyoutItem Title="Meal Planner" Icon="calendar.png">
+	<FlyoutItem Title="📅Meal Planner">
 		<Tab>
 			<ShellContent ContentTemplate="{DataTemplate local:MealPlannerPage}" />
 		</Tab>
 	</FlyoutItem>
-	<FlyoutItem Title="Shopping List" Icon="list.png">
+	<FlyoutItem Title="🧾Shopping List">
 		<Tab>
 			<ShellContent ContentTemplate="{DataTemplate local:ShoppingListPage}" />
 		</Tab>						
 	</FlyoutItem>
-	<FlyoutItem Title="Settings" Icon="list.png">
+	<FlyoutItem Title="⚙️Settings">
 		<Tab>
 			<ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
 		</Tab>

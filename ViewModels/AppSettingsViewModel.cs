@@ -14,46 +14,64 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 {
 	public class AppSettingsViewModel : INotifyPropertyChanged
 	{
+		//Required for notifying the UI when a property changes
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private SettingsService _settingsService;
+		// Services
+		private SettingsService _settingsService; //Provides access to saved app settings
+
+		//Command for saving settings
 		public ICommand SaveSettingsCommand { get; }
 
-		public ObservableCollection<string> MeasurementUnits { get; } = new() {"Metric","Imperial"};
+		//Collections for binding dropdown/picker options
+		public ObservableCollection<string> MeasurementUnits { get; } = new() { "Metric", "Imperial" };
 		public ObservableCollection<string> ThemeModeColor { get; } = new() { "Light", "Dark" };
 
-		public AppSettingsViewModel(SettingsService settingsService) {
+
+		//Constructor: injects settings service and initializes SaveSettingsCommand
+		public AppSettingsViewModel(SettingsService settingsService)
+		{
 			_settingsService = settingsService;
+
+			//Bind SaveSettingsCommand to OnSaveSettings method
 			SaveSettingsCommand = new Command(OnSaveSettings);
 		}
 
+
+		//Method triggered when the user clicks "Save" button
 		private async void OnSaveSettings()
 		{
-			
+			//Persist the settings to storage
 			_settingsService.Save();
+
+			//Apply the selected theme to the app immediately
 			Application.Current.UserAppTheme =
-					_settingsService.AppSettings.ThemeMode.Equals("Dark") ? AppTheme.Dark : AppTheme.Light;
+				_settingsService.AppSettings.ThemeMode.Equals("Dark") ? AppTheme.Dark : AppTheme.Light;
+
+			//Show confirmation alert
 			await Application.Current.MainPage.DisplayAlert(
-					"Success",
-					"Settings saved successfully!",
-					"OK");
+				"Success",
+				"Settings saved successfully!",
+				"OK");
 		}
+		//Binding property for selected theme mode
 		public string ThemeModeColorSelected
 		{
 			get => _settingsService.AppSettings.ThemeMode;
 			set
 			{
-				_settingsService.AppSettings.ThemeMode = value;
-				Debug.WriteLine("Theme: " + value);
+				_settingsService.AppSettings.ThemeMode = value;//Update setting
+				Debug.WriteLine("Theme: " + value);//Log change
 			}
 		}
+		//Binding property for selected measurement unit (Metric / Imperial)
 		public string SelectedMeasurementUnit
 		{
 			get => _settingsService.AppSettings.MeasurmentUnits;
 			set
 			{
-				_settingsService.AppSettings.MeasurmentUnits = value;
-				Debug.WriteLine("Measurment: " + value);
+				_settingsService.AppSettings.MeasurmentUnits = value;//Update setting
+				Debug.WriteLine("Measurment: " + value);//Log change
 			}
 		}
 		//Enabling Categories
@@ -64,7 +82,7 @@ namespace Montealegre_Sofia_RecipeDiscover.ViewModels
 			{
 				_settingsService.AppSettings.FoodCategories.Vegetarian = value;
 				Debug.WriteLine("Seafood: " + value);
-				OnPropertyChanged();
+				OnPropertyChanged(); //Notify UI
 			}
 
 

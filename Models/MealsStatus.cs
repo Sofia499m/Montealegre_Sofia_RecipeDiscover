@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace Montealegre_Sofia_RecipeDiscover.Models
 {
+	//Represents the status of meals for a given day or context
+	//Implements INotifyPropertyChanged to allow UI binding updates
 	public class MealsStatus : INotifyPropertyChanged
 	{
+		// Public properties with change notification
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		private string _name;

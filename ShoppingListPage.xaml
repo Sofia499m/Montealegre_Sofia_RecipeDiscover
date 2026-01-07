@@ -1,46 +1,78 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Montealegre_Sofia_RecipeDiscover.ShoppingListPage"
-             Title="">
-	<VerticalStackLayout Padding="16" Spacing="16">
-		<Label Text="Shopping List" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Padding="20"/>
-		<Grid RowDefinitions="Auto,*" Padding="10">
-			<Grid Grid.Row="0"
-			  ColumnDefinitions="*,Auto,Auto"
-			  Padding="10">
+             x:Class="Montealegre_Sofia_RecipeDiscover.ShoppingListPage">
+	<Grid Padding="16" RowDefinitions="Auto,*,Auto" RowSpacing="16">
 
-				<Label Text="Ingredient"
-               FontAttributes="Bold" />
-
-				<Label Grid.Column="1"
-               Text="Qty"
+		<!-- Page Title -->
+		<Label Grid.Row="0"
+               Text="🧾 Shopping List"
+               FontSize="24"
                FontAttributes="Bold"
-               HorizontalOptions="End" />
+               HorizontalOptions="Center"/>
 
-				<Label Grid.Column="2"
-               Text="Unit"
-               FontAttributes="Bold"
-               Margin="5,0,0,0" />
-			</Grid>
-			<CollectionView Grid.Row="1"
-							ItemsSource="{Binding ShoppingItems}">
-				<CollectionView.ItemTemplate>
-					<DataTemplate>
-						<Grid ColumnDefinitions="*,Auto,Auto" Padding="10">
-							<Label Text="{Binding Name}" />
-							<Label 
-								Grid.Column="1"
-								Text="{Binding TotalQuantity}"
-								HorizontalOptions="End" />
-							<Label 
-								Grid.Column="2"
-								Text="{Binding Unit}"
-								Margin="5,0,0,0" />
-						</Grid>
-					</DataTemplate>
-				</CollectionView.ItemTemplate>
-			</CollectionView>
-		</Grid>
-	</VerticalStackLayout>
+		<!-- MAIN SCROLLER -->
+		<CollectionView Grid.Row="1"
+                        ItemsSource="{Binding ShoppingItems}"
+                        SelectionMode="None">
+			<!-- HEADER -->
+			<CollectionView.Header>
+				<Grid ColumnDefinitions="50,*,80,60"
+                      Padding="10">
+					<Label Grid.Column="0"
+                           Text="✓"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+					<Label Grid.Column="1"
+                           Text="Items"
+                           FontAttributes="Bold"/>
+					<Label Grid.Column="2"
+                           Text="Quantity"
+                           FontAttributes="Bold"
+                           HorizontalOptions="End"/>
+					<Label Grid.Column="3"
+                           Text="Unit"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+				</Grid>
+			</CollectionView.Header>
+
+			<!-- ITEMS -->
+			<CollectionView.ItemTemplate>
+				<DataTemplate>
+					<Grid ColumnDefinitions="50,*,80,60"
+                          Padding="10">
+						<CheckBox Grid.Column="0"
+                                  IsChecked="{Binding IsChecked}"
+                                  HorizontalOptions="Center"/>
+						<Label Grid.Column="1"
+                               Text="{Binding Name}"/>
+						<Label Grid.Column="2"
+                               Text="{Binding TotalQuantity}"
+                               HorizontalOptions="End"/>
+						<Label Grid.Column="3"
+                               Text="{Binding Unit}"
+                               HorizontalOptions="Center"/>
+					</Grid>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		<!-- BUTTON (Outside CollectionView) -->
+		<Button Grid.Row="2"
+                Text="Save Shopping List"
+                Command="{Binding SaveShoppingListCommand}"
+                FontSize="18"
+                FontAttributes="Bold"
+                TextColor="White"
+                HeightRequest="50"
+                CornerRadius="10">
+			<Button.Background>
+				<LinearGradientBrush>
+					<GradientStop Color="DarkSalmon" Offset="0"/>
+					<GradientStop Color="Aquamarine" Offset="1"/>
+				</LinearGradientBrush>
+			</Button.Background>
+		</Button>
+
+	</Grid>
 </ContentPage>
